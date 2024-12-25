@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Pull repo
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Build new container
         run: |
