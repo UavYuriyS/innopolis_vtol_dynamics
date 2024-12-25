@@ -37,6 +37,7 @@ class DockerWrapper:
         '-e', 'DISPLAY=:0',
         '-e', 'QT_X11_NO_MITSHM=1',
         '--privileged',
+        '--restart=unless-stopped',
     ]
     @staticmethod
     def build(full_image_name : str, dockerfile_dir: str = DOCKERFILE_DIR) -> None:

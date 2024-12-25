@@ -1,0 +1,23 @@
+name: deploy wiki
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on:
+      labels: [self-hosted, rpi]
+    timeout-minutes: 40
+    steps:
+      - name: Pull repo
+        uses: actions/checkout@v3
+
+      - name: Build new container
+        run: |
+          ./scripts/sim.py b
+
+      - name: Restart sim
+        run: |
+          ./scripts/sim.py dv
