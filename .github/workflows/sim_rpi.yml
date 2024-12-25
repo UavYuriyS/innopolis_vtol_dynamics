@@ -12,12 +12,10 @@ jobs:
     timeout-minutes: 40
     steps:
       - name: Pull repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          submodules: recursive
-
-      - name: Fetch tags
-        run: git fetch --prune --tags
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Build new container
         run: |
