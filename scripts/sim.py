@@ -212,6 +212,9 @@ def main():
     sniffer_help = "explicitly specify what sniffer to use"
     parser.add_argument("--sniffer", type=str, required=False, help=sniffer_help, default=None)
 
+    quiet_help = "disable logging output"
+    parser.add_argument("--quiet", type=bool, required=False, help=quiet_help, default=False)
+
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)
@@ -233,9 +236,12 @@ def main():
     commander = SimCommander(model=model)
     commander.execute(command)
 
+    # TODO remove a dependency on the stty mb? Breaks with CI/CD and whatnot
+
     try:
         while True:
-            view.process()
+            if not args.quiet:
+                view.process()
             time.sleep(0.01)
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
