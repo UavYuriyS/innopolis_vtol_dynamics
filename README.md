@@ -1,7 +1,7 @@
 [![catkin_build](https://github.com/ZilantRobotics/innopolis_vtol_dynamics/actions/workflows/catkin_build.yml/badge.svg)](https://github.com/ZilantRobotics/innopolis_vtol_dynamics/actions/workflows/catkin_build.yml) [![docker](https://github.com/ZilantRobotics/innopolis_vtol_dynamics/actions/workflows/docker.yml/badge.svg)](https://github.com/ZilantRobotics/innopolis_vtol_dynamics/actions/workflows/docker.yml) [![pylint](https://github.com/ZilantRobotics/innopolis_vtol_dynamics/actions/workflows/pylint.yml/badge.svg)](https://github.com/ZilantRobotics/innopolis_vtol_dynamics/actions/workflows/pylint.yml)
 
-![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fbadger.peacefulmatrix.site%2Fgarbage_out%2F%3Fbadge_name%3Dsimulator%26api_key%3DD83LF%252FFeVALQI5%2529%257D%252CIK2eJ%255BQU%25295~%253AE9iAe9%25C2%25A3f%25C2%25A3-Lbyuf88%257B85f)
-![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fbadger.peacefulmatrix.site%2Fgarbage_out%2F%3Fbadge_name%3Dautopilot%26api_key%3DD83LF%252FFeVALQI5%2529%257D%252CIK2eJ%255BQU%25295~%253AE9iAe9%25C2%25A3f%25C2%25A3-Lbyuf88%257B85f)
+![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fbadger.peacefulmatrix.site%2Fgarbage_out%2F%3Fbadge_name%3Dautopilot%26api_key%3DD83LF%252FFeVALQI5%2529%257D%252CIK2eJ%255BQU%25295~%253AE9iAe9%25C2%25A3f%25C2%25A3-Lbyuf88%257B85f&cacheSeconds=5)
+![Endpoint Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fbadger.peacefulmatrix.site%2Fgarbage_out%2F%3Fbadge_name%3Dsimulator%26api_key%3DD83LF%252FFeVALQI5%2529%257D%252CIK2eJ%255BQU%25295~%253AE9iAe9%25C2%25A3f%25C2%25A3-Lbyuf88%257B85f&cacheSeconds=5)
 
 
 # UAV HITL Simulator
