@@ -29,7 +29,6 @@ class DockerWrapper:
     REPOSITORY_DIR = Path(__file__).parent.parent.absolute()
     DOCKERFILE_DIR = REPOSITORY_DIR
     COMMON_DOCKER_FLAGS = [
-        '--rm',
         '--net=host',
         f'--volume={REPOSITORY_DIR}/uav_dynamics/uav_hitl_dynamics/config:/catkin_ws/src/uav_hitl_simulator/uav_dynamics/uav_hitl_dynamics/config:ro',
         f'--volume={REPOSITORY_DIR}/configs/dynamics:/catkin_ws/src/uav_hitl_simulator/configs/dynamics:ro',
