@@ -27,4 +27,4 @@ jobs:
 
       - name: Restart sim
         run: |
-          ./scripts/sim.py dv --quiet=True
+          ./scripts/sim.py dv --quiet=True &
