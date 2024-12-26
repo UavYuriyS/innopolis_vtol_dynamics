@@ -16,11 +16,9 @@ jobs:
         with:
           fetch-tags: true
 
-      - name: Pull repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          fetch-tags: true
+      - name: Pull submodules
+        run: |
+          git submodule update --init --recursive
 
       - name: Build new container
         run: |
