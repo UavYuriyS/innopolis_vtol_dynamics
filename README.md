@@ -330,6 +330,36 @@ Outdated manual instructions:
 - [PX4 DroneCAN manual configuration instructions](docs/px4/dronecan.md)
 - [ArduPilot manual configuration instructions](docs/ardupilot/README.md)
 
+## Sim 1.0
+
+Run the dynamics simulator:
+
+```bash
+./UavDynamics-x86_64.AppImage --config configs/dynamics/quadplane_vtol_5kg_px4_sitl/params.yaml
+```
+
+PX4 SITL:
+
+Run SITL flight stack:
+
+```bash
+cd PX4-Autopilot
+DONT_RUN=1 make px4_sitl_default
+PX4_SIM_MODEL=gazebo-classic_standard_vtol ./build/px4_sitl_default/bin/px4 ./build/px4_sitl_default/etc -s etc/init.d-posix/rcS -i 0
+```
+
+ArduPilot SITL:
+
+```bash
+./waf configure --board=sit
+./build/sitl/bin/arducopter --model quadplane
+./waf plane
+./build/sitl/bin/arduplane --model quadplane
+
+#
+sim_vehicle.py -v ArduPlane -f JSON --console --map
+```
+
 ## 8. CHANGELOG NOTES
 
 | Version | ReleaseDate | Major changes |
