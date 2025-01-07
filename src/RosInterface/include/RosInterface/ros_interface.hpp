@@ -26,6 +26,38 @@
 #include <memory>
 #include "UavDynamics/sim.hpp"
 
+union OctoplaneVtolAirframeIn3dSim {
+    struct {
+        double motor_front_right_rpm;
+        double motor_rear_left_rpm;
+        double motor_front_left_rpm;
+        double motor_rear_right_rpm;
+
+        double left_aileron_deg;
+        double right_aileron_deg;
+        double elevator_deg;
+        double rudder_deg;
+
+        double pusher_motor_rpm;
+
+        void print()
+        {
+            std::cout << "Actuators: ["
+                      << motor_front_right_rpm << ", "
+                      << motor_rear_left_rpm << ", "
+                      << motor_front_left_rpm << ", "
+                      << motor_rear_right_rpm << "], ("
+                      << left_aileron_deg << ", "
+                      << right_aileron_deg << ", "
+                      << elevator_deg << ", "
+                      << rudder_deg << "), throttle="
+                      << pusher_motor_rpm << "." << std::endl;
+        }
+    } controls;
+
+    double values[sizeof(controls) / sizeof(double)];
+};
+
 class RosPublisher {
 public:
     RosPublisher(std::shared_ptr<UavDynamics::Sim> sim, const std::string& uri = "ws://localhost:9090") :
@@ -85,7 +117,7 @@ private:
     }
 
     void start_timer() {
-        _timer = std::make_unique<boost::asio::steady_timer>(_client.get_io_service(), std::chrono::milliseconds(100));  // 10 Hz rate
+        _timer = std::make_unique<boost::asio::steady_timer>(_client.get_io_service(), std::chrono::milliseconds(40));  // 25 Hz rate
         _timer->async_wait([this](const boost::system::error_code& ec) {
             if (!ec) {
                 this->publish_messages();
@@ -124,11 +156,45 @@ private:
     }
 
     void publish_actuators() {
+        // OctoplaneVtolAirframeIn3dSim airframe = {
+        //     .controls = {
+        //         .motor_front_right_rpm = _sim->getActuatorState(0) * (60 / 2 / 3.14),
+        //         .motor_rear_left_rpm = _sim->getActuatorState(1) * (60 / 2 / 3.14),
+        //         .motor_front_left_rpm = _sim->getActuatorState(2) * (60 / 2 / 3.14),
+        //         .motor_rear_right_rpm = _sim->getActuatorState(3) * (60 / 2 / 3.14),
+
+        //         .left_aileron_deg = 1.5 * _sim->getActuatorState(5) * (180 / 3.14),
+        //         .right_aileron_deg = 1.5 * _sim->getActuatorState(6) * (180 / 3.14),
+        //         .elevator_deg = 1.5 * _sim->getActuatorState(7) * (180 / 3.14),
+        //         .rudder_deg = +50,
+
+        //         .pusher_motor_rpm = _sim->getActuatorState(4) * (60 / 2 / 3.14),
+        //     }
+        // };
+
+        OctoplaneVtolAirframeIn3dSim airframe = {
+            .controls = {
+                .motor_front_right_rpm = 0.0,
+                .motor_rear_left_rpm = 0.0,
+                .motor_front_left_rpm = 0.0,
+                .motor_rear_right_rpm = 0.0,
+
+                .left_aileron_deg = 1.5 * _sim->getActuatorState(5) * (180 / 3.14),
+                .right_aileron_deg = 1.5 * _sim->getActuatorState(6) * (180 / 3.14),
+                .elevator_deg = 1.5 * _sim->getActuatorState(7) * (180 / 3.14),
+                .rudder_deg = 1.5 * _sim->getActuatorState(2) * (180 / 3.14),
+
+                .pusher_motor_rpm = _sim->getActuatorState(4) * (60 / 2 / 3.14),
+            }
+        };
+
         nlohmann::json msg = {
             {"header", {{"stamp", {{"sec", 12345}, {"nsec", 67890}}}, {"frame_id", "base_link"}}},
-            {"axes", {10, 50, 100, 200, 30, -30, -30, +1, 400}},  // Example axes values
-            {"buttons", {1, 0, 0, 1}}        // Example button values
+            {"buttons", {1, 0, 0, 1}}
         };
+        msg["axes"] = std::vector<double>(std::begin(airframe.values), std::end(airframe.values));
+
+        airframe.controls.print();
         publish_message("/sim/actuators", msg);
     }
 

@@ -32,7 +32,7 @@ environment:
   # At 10,000 m altitude: ~0.413 kg/m^3
   atmoRho: 1.2  # air density (kg/m^3)
 
-  windNed: [0.1, 0.0, 0.0]
+  windNed: [0.0, 0.0, 0.0]
 
 vehicle:
   mass: 5.0 # kg

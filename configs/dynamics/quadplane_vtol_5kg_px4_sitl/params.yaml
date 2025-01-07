@@ -83,7 +83,7 @@ actuators:
     #    This causes to yaw to the right (adverse yaw) that means Positive moment.
     - name: Left Aileron
       type: servo
-      cm: [-0.2, 0.00, 0.02]
+      cm: [-0.05, 0.00, 0.02]
       timeConstant: 0.01
       maxAngleDeg: 20
 
@@ -99,7 +99,7 @@ actuators:
     #    This causes to yaw to the left (adverse yaw) that means Negative moment.
     - name: Right Aileron
       type: servo
-      cm: [+0.2, 0.00, -0.02]
+      cm: [+0.05, 0.00, -0.02]
       timeConstant: 0.01
       maxAngleDeg: 20
 
