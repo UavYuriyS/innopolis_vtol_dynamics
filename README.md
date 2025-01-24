@@ -25,6 +25,9 @@ The key feature is to run the simulation on a real hardware and use the actual C
 
 - Operating System: Pure Ubuntu 20.04, 22.04 or 24.04 installation is highly recommended; WSL and VM are not recommended
 Operating System: A pure installation of Ubuntu 20.04, 22.04, or 24.04 is recommended; avoid WSL and VMs
+    - Proceed with the following at your own risk: 
+    - As of the time of writing, WSL2 requires a custom kernel build with slcan enabled and usbipd to mount the sniffer and the autopilot into the VM
+    - Also works on ESXi VMs, but requires USB device / PCI USB-host passthrough. Tested on an ESXi host with a dedicated PCI-USB card, because onboard PCI USBs did not work
 - Docker: use regular Docker Engine, not Docker Desktop (because Docker Desktop relies on VM)
 - Performance: for HITL part even Raspberry PI 4 is enough
 
